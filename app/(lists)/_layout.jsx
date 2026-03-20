@@ -11,7 +11,6 @@ export default function ListLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack screenOptions={{ headerShown: false }} />
         <Stack.Screen name='index' options={{ headerShown: false}} />
         <Stack.Screen name='contact' options={{ headerShown: false}} />
         <Stack.Screen name='menu/index' options={{ headerShown: false}} />
