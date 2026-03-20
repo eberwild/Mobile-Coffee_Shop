@@ -1,50 +1,65 @@
-import { View, Text , StyleSheet , ImageBackground} from 'react-native';
+import { View, Text , StyleSheet , Image} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
 import { MENU_ITEMS } from '@/constants/MenuItems';
-import MENU_IMAGES from '@/constants/MenuImages';
+import MenuImages from '@/constants/MenuImages';
 
 export default function Detail() {
 
     const { id } = useLocalSearchParams();
 
     const { title , description} = MENU_ITEMS.find(item => item.id.toString() === id);
-    const image = MENU_IMAGES[id - 1];
+
+    const image = MenuImages[id -1];
 
     return (
-        <View style={styles.container}>
-            <ImageBackground 
-                source={image}
-                resizeMode='cover'
-                style={styles.image}
-            >
+        <SafeAreaView style={styles.container}>
+            <View>
+                <Text style={styles.title}>{title}</Text>
+
+                <Image source={image}
+                        style={styles.image}
+                />
+                
                 <View style={styles.textContainer}>
-                    <Text style={styles.text}>Item ID: {id}</Text>
-                    <Text style={styles.text}>Item Title: {title}</Text>
-                    <Text style={styles.text}>Item Description: {description}</Text>
+                    <Text style={styles.text}>{description}</Text>
                 </View>
-            </ImageBackground>
-        </View>
+            
+            </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent: 'start',
+        alignItems: 'center',
+        marginTop: 10,
+    },
+    title: {
+        fontSize: 30,
+        alignSelf: 'center',
+        color: 'rgba(218, 130, 15, 0.6)'
     },
     text: {
         color: 'white',
-        fontSize: 25,
+        fontSize: 19,
         textAlign: 'center'
     },
     textContainer: {
-        backgroundColor: 'rgba(0,0,0,0.5)'
+        backgroundColor: 'rgba(218, 130, 15, 0.6)',
+        padding: 15,
+        marginHorizontal: 10,
+        borderRadius: 10
     },
     image: {
-        width: '100%',
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center'
+        resizeMode: 'cover',
+        borderRadius: 15,
+        alignSelf: 'center',
+        borderColor: 'rgba(218, 130, 15, 0.6)',
+        borderWidth: 1,
+        marginBottom: 30,
+        marginTop: 30
     }
 })
