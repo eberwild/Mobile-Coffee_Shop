@@ -2,7 +2,7 @@ import MenuImages from "@/constants/MenuImages";
 import { MENU_ITEMS } from "@/constants/MenuItems";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Button, Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Detail() {
@@ -28,19 +28,25 @@ export default function Detail() {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button
-          title="-"
+        <Pressable
+          style={styles.button}
           onPress={() => {
-            setValue((prev) => prev - 1);
+            if (value > 0) {
+              setValue((prev) => prev - 1);
+            }
           }}
-        ></Button>
+        >
+          <Text style={styles.buttonText}>-</Text>
+        </Pressable>
         <Text style={styles.value}>{value}</Text>
-        <Button
-          title="+"
+        <Pressable
+          style={styles.button}
           onPress={() => {
             setValue((prev) => prev + 1);
           }}
-        ></Button>
+        >
+          <Text style={styles.buttonText}>+</Text>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
@@ -89,8 +95,18 @@ const styles = StyleSheet.create({
     width: "95%",
     borderRadius: 10,
   },
+  button: {
+    backgroundColor: "rgba(218, 130, 15, 0.6)",
+    height: 50,
+    width: 50,
+    borderRadius: 20,
+    alignItems: "center",
+  },
+  buttonText: {
+    fontSize: 25,
+  },
   value: {
-    fontSize: 20,
+    fontSize: 25,
     color: "white",
   },
 });
