@@ -1,3 +1,6 @@
+import Cart from "@/assets/images/icons/cart.png";
+import Minus from "@/assets/images/icons/minus.png";
+import Plus from "@/assets/images/icons/plus.png";
 import MenuImages from "@/constants/MenuImages";
 import { MENU_ITEMS } from "@/constants/MenuItems";
 import { useLocalSearchParams } from "expo-router";
@@ -18,7 +21,16 @@ export default function Detail() {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text style={styles.title}>{title}</Text>
+        <View style={styles.topRow}>
+          <Text style={styles.title}>{title}</Text>
+          <Pressable style={styles.cartButton}>
+            <Image
+              source={Cart}
+              style={[styles.icon, styles.cart]}
+              resizeMode="cover"
+            />
+          </Pressable>
+        </View>
 
         <Image source={image} style={styles.image} />
 
@@ -36,7 +48,7 @@ export default function Detail() {
             }
           }}
         >
-          <Text style={styles.buttonText}>-</Text>
+          <Image source={Minus} resizeMode="cover" style={styles.icon} />
         </Pressable>
         <Text style={styles.value}>{value}</Text>
         <Pressable
@@ -45,9 +57,13 @@ export default function Detail() {
             setValue((prev) => prev + 1);
           }}
         >
-          <Text style={styles.buttonText}>+</Text>
+          <Image source={Plus} resizeMode="cover" style={styles.icon} />
         </Pressable>
       </View>
+
+      <Pressable style={styles.addCartButton}>
+        <Text style={styles.text}>Add to Cart</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
@@ -58,6 +74,16 @@ const styles = StyleSheet.create({
     justifyContent: "start",
     alignItems: "center",
     marginTop: 10,
+  },
+  topRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  cartButton: {
+    backgroundColor: "white",
+    padding: 4,
+    borderRadius: 29,
   },
   title: {
     fontSize: 35,
@@ -89,24 +115,29 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    padding: 25,
-    backgroundColor: "rgba(104, 98, 98, 0.8)",
-    marginTop: 50,
+    padding: 15,
+    backgroundColor: "rgba(223, 213, 213, 0.8)",
+    marginTop: 25,
     width: "95%",
     borderRadius: 10,
   },
   button: {
-    backgroundColor: "rgba(218, 130, 15, 0.6)",
     height: 50,
     width: 50,
-    borderRadius: 20,
-    alignItems: "center",
   },
-  buttonText: {
-    fontSize: 25,
+  icon: {
+    with: 50,
+    height: 50,
   },
   value: {
     fontSize: 25,
     color: "white",
+  },
+  addCartButton: {
+    marginTop: 15,
+    padding: 10,
+    backgroundColor: "rgba(218, 130, 15, 0.6)",
+    width: "30%",
+    borderRadius: 18,
   },
 });
